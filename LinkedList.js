@@ -92,7 +92,7 @@ function LinkedList(){
 	}
 
 	this.removeItem = function(index){
-		if(index >= getlength()){
+		if(index >= getlength() || getlength() == 0){
 			return null;
 		}
 		else if(getlength() == 1){
@@ -109,6 +109,9 @@ function LinkedList(){
 			}
 			var deleteNode = currentNode.next;
 			currentNode.next = deleteNode.next;
+			if(index == getlength() - 1){
+				setend(currentNode);
+			}
 		}
 		setlength(getlength()-1);
 	}

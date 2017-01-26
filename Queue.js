@@ -6,7 +6,7 @@ function Queue(){
 	this.dequeue = function(){
 		queueList.removeItem(0);
 	}
-	this.getLength = function(){
+	this.size = function(){
 		return queueList.getLength();
 	}
 	this.map = function(callback){
