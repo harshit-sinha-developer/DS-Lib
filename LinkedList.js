@@ -57,18 +57,7 @@ function LinkedList(){
 	}
 
 	this.addItem = function(dataItem){
-		var newNode = new Object();
-		newNode.data = dataItem;
-		newNode.next = null;
-		if(getstart() == null){
-			setstart(newNode);
-			setend(newNode);
-		}
-		else{
-			getend().next = newNode;
-			setend(newNode)
-		}
-		setlength(getlength()+1);
+		this.addItemAtIndex(this.getLength(), dataItem);
 	}
 
 	this.addItemAtIndex = function(index, dataItem){
@@ -84,6 +73,7 @@ function LinkedList(){
 		}
 		else if(index == getlength()){
 			getend().next = newNode;
+			setend(newNode);
 		}
 		else if(index == 0){
 			newNode.next = getstart();
@@ -129,5 +119,59 @@ function LinkedList(){
 			callback(currentNode.data);
 			currentNode = currentNode.next;
 		}
+	}
+
+	this.getLength = function(){
+		return getlength();
+	}
+
+	this.toArray = function(){
+		var listArray = [];
+		this.map(function(data){
+			listArray.push(data);
+		});
+		return listArray;
+	}
+
+	this.contains = function(dataItem){
+		var currentNode = getstart();
+		var containsFlag = false;
+		while(currentNode !== null){
+			if(currentNode.data == dataItem){
+				containsFlag = true;
+				break;
+			}
+			currentNode = currentNode.next;
+		}
+		return containsFlag;
+	}
+
+	this.indexOf = function(dataItem){
+		var currentNode = getstart();
+		var itemIndex = -1;
+		var currentIndex = 0;
+		while(currentNode !== null){
+			if(currentNode.data == dataItem){
+				itemIndex = currentIndex;
+				break;
+			}
+			currentNode = currentNode.next;
+			currentIndex++;
+		}
+		return itemIndex;
+	}
+
+	this.lastIndexOf = function(dataItem){
+		var currentNode = getstart();
+		var itemIndex = -1;
+		var currentIndex = 0;
+		while(currentNode !== null){
+			if(currentNode.data == dataItem){
+				itemIndex = currentIndex;
+			}
+			currentNode = currentNode.next;
+			currentIndex++;
+		}
+		return itemIndex;
 	}
 }
