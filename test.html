@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="LinkedList.js"></script>
+</head>
+<body>
+<script>
+alert('Hi Sahil!! Please open your browser console');
+var li = new LinkedList();
+for(var i=10;i<30;i++){
+	li.addItem(i);
+}
+
+li.addItemAtIndex(5, 999);
+li.getNode(9);
+li.removeItem(8);
+//list traversal  data represents data at each node
+li.map(function(data){
+	console.log(data);
+});
+
+</script>
+</body>
+</html>
