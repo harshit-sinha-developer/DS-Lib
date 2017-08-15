@@ -61,58 +61,11 @@ var DsLib =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _LinkedList = __webpack_require__(1);
-
-Object.defineProperty(exports, 'LinkedList', {
-  enumerable: true,
-  get: function get() {
-    return _LinkedList.LinkedList;
-  }
-});
-
-var _QueueList = __webpack_require__(4);
-
-Object.defineProperty(exports, 'QueueList', {
-  enumerable: true,
-  get: function get() {
-    return _QueueList.QueueList;
-  }
-});
-
-var _StackList = __webpack_require__(5);
-
-Object.defineProperty(exports, 'StackList', {
-  enumerable: true,
-  get: function get() {
-    return _StackList.StackList;
-  }
-});
-
-var _HashSet = __webpack_require__(6);
-
-Object.defineProperty(exports, 'Set', {
-  enumerable: true,
-  get: function get() {
-    return _HashSet.Set;
-  }
-});
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -311,6 +264,53 @@ var LinkedList = exports.LinkedList = function () {
 }();
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _LinkedList = __webpack_require__(0);
+
+Object.defineProperty(exports, 'LinkedList', {
+  enumerable: true,
+  get: function get() {
+    return _LinkedList.LinkedList;
+  }
+});
+
+var _QueueList = __webpack_require__(4);
+
+Object.defineProperty(exports, 'QueueList', {
+  enumerable: true,
+  get: function get() {
+    return _QueueList.QueueList;
+  }
+});
+
+var _StackList = __webpack_require__(5);
+
+Object.defineProperty(exports, 'StackList', {
+  enumerable: true,
+  get: function get() {
+    return _StackList.StackList;
+  }
+});
+
+var _HashSet = __webpack_require__(6);
+
+Object.defineProperty(exports, 'Set', {
+  enumerable: true,
+  get: function get() {
+    return _HashSet.Set;
+  }
+});
+
+/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -378,7 +378,7 @@ exports.QueueList = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _LinkedList = __webpack_require__(1);
+var _LinkedList = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -397,7 +397,11 @@ var QueueList = exports.QueueList = function () {
     }, {
         key: 'dequeue',
         value: function dequeue() {
-            this.list.removeFirstItem();
+            if (!this.isEmpty()) {
+                this.list.removeFirstItem();
+            } else {
+                throw new Error('Cannot perform the dequeue operation, the Queue is empty');
+            }
         }
     }, {
         key: 'isEmpty',
@@ -443,7 +447,7 @@ exports.StackList = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _LinkedList = __webpack_require__(1);
+var _LinkedList = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -462,9 +466,12 @@ var StackList = exports.StackList = function () {
 	}, {
 		key: 'pop',
 		value: function pop() {
-			var popElement = this.list.getLastItem();
-			this.list.removeLastItem();
-			return popElement;
+			if (!this.isEmpty()) {
+				var popElement = this.list.getLastItem();
+				this.list.removeLastItem();
+				return popElement;
+			}
+			throw new Error('Cannot perform the pop operation, the stack is empty');
 		}
 	}, {
 		key: 'peek',

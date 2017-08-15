@@ -14,7 +14,11 @@ export class QueueList {
     }
 
     dequeue() {
-        this.list.removeFirstItem();
+        if (!this.isEmpty()) {
+            this.list.removeFirstItem();
+        } else {
+            throw new Error('Cannot perform the dequeue operation, the Queue is empty');
+        }
     }
 
     isEmpty() {
@@ -24,7 +28,7 @@ export class QueueList {
     peek() {
         return this.list.getFirstItem();
     }
-    
+
     map(callback) {
         this.list.map(callback);
     }

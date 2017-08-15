@@ -14,9 +14,12 @@ export class StackList {
 	}
 
 	pop() {
-		let popElement = this.list.getLastItem();
-		this.list.removeLastItem();
-		return popElement;
+		if (!this.isEmpty()) {
+			let popElement = this.list.getLastItem();
+			this.list.removeLastItem();
+			return popElement;
+		}
+		throw new Error('Cannot perform the pop operation, the stack is empty')
 	}
 
 	peek() {
