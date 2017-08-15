@@ -17,7 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 2. npm install
 3. npm start
 
-## Installing
+## Usage
 
 Download the [dist/bundle.js](https://github.com/harshit-sinha-developer/js-data_structures/blob/master/dist/bundle.js) file and include it into your scripts
 ```
