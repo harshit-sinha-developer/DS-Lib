@@ -19,10 +19,22 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Usage
 
-Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.js) file and include it into your scripts
+#### In Browser
+To use the Library in browser Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.js) file and include it into your scripts
 ```
 <script src="dslib.js"></script>
 ```
+
+#### Node.js
+1. To use the Library in Node.js install the Library through npm
+```
+> npm install ds-lib --save
+```
+2. Include the library in your source code
+```
+var DsLib = require('ds-lib');
+```
+
 ## Included Data Structures
 
 ### 1. Linked List
