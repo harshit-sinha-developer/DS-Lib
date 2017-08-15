@@ -19,9 +19,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Usage
 
-Download the [dist/bundle.js](https://github.com/harshit-sinha-developer/js-data_structures/blob/master/dist/bundle.js) file and include it into your scripts
+Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/js-data_structures/blob/master/dist/bundle.js) file and include it into your scripts
 ```
-<script src="bundle.js"></script>
+<script src="dslib.js"></script>
 ```
 ## Included Data Structures
 
