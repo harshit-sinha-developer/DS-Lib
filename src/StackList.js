@@ -13,10 +13,14 @@ export class StackList {
 		this.list.addItem(item);
 	}
 
-	pop(item) {
+	pop() {
 		let popElement = this.list.getLastItem();
 		this.list.removeLastItem();
 		return popElement;
+	}
+
+	peek() {
+		return this.list.getLastItem();
 	}
 
 	isEmpty() {

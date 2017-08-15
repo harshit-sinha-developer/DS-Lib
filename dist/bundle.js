@@ -452,10 +452,15 @@ var StackList = exports.StackList = function () {
 		}
 	}, {
 		key: 'pop',
-		value: function pop(item) {
+		value: function pop() {
 			var popElement = this.list.getLastItem();
 			this.list.removeLastItem();
 			return popElement;
+		}
+	}, {
+		key: 'peek',
+		value: function peek() {
+			return this.list.getLastItem();
 		}
 	}, {
 		key: 'isEmpty',
