@@ -93,6 +93,15 @@ Object.defineProperty(exports, 'QueueList', {
   }
 });
 
+var _StackList = __webpack_require__(5);
+
+Object.defineProperty(exports, 'StackList', {
+  enumerable: true,
+  get: function get() {
+    return _StackList.StackList;
+  }
+});
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -409,6 +418,68 @@ var QueueList = exports.QueueList = function () {
     }]);
 
     return QueueList;
+}();
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.StackList = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _LinkedList = __webpack_require__(1);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var StackList = exports.StackList = function () {
+	function StackList() {
+		_classCallCheck(this, StackList);
+
+		this.list = new _LinkedList.LinkedList();
+	}
+
+	_createClass(StackList, [{
+		key: 'push',
+		value: function push(item) {
+			this.list.addItem(item);
+		}
+	}, {
+		key: 'pop',
+		value: function pop(item) {
+			var popElement = this.list.getLastItem();
+			this.list.removeLastItem();
+			return popElement;
+		}
+	}, {
+		key: 'isEmpty',
+		value: function isEmpty() {
+			return this.list.length == 0;
+		}
+	}, {
+		key: 'map',
+		value: function map(callback) {
+			this.list.map(callback);
+		}
+	}, {
+		key: 'toArray',
+		value: function toArray() {
+			return this.list.toArray();
+		}
+	}, {
+		key: 'length',
+		get: function get() {
+			return this.list.length;
+		}
+	}]);
+
+	return StackList;
 }();
 
 /***/ })
