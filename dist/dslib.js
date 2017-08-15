@@ -1,5 +1,14 @@
-var DsLib =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["DsLib"] = factory();
+	else
+		root["DsLib"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -575,4 +584,5 @@ function Set() {
 
 /***/ })
 /******/ ]);
+});
 //# sourceMappingURL=dslib.js.map
