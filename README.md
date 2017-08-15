@@ -46,3 +46,36 @@ console.log(linkedList.toArray())
 // [1, 2, 3, 4, 5, 6, 7]
 </script>
 ```
+
+2. Queue
+```
+var queue = new DsLib.QueueList();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+queue.enqueue(4);
+queue.enqueue(5);
+queue.enqueue(6);
+
+queue.map(function(value) {
+    console.log(value)
+});
+// Output
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+
+queue.dequeue();
+queue.dequeue();
+queue.map(function(value) {
+    console.log(value)
+});
+// Output
+// 3
+// 4
+// 5
+// 6
+```
