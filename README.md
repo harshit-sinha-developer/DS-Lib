@@ -1,4 +1,4 @@
-# Js Data Structures
+# DS-Lib
 
 An implementation of basic Data Structures in JavaScript
 
