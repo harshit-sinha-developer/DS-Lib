@@ -88,6 +88,45 @@ export class LinkedList {
 		return currentNode.data;
 	}
 
+	removeFirstItem() {
+		if (this.start == null) {
+			throw new Error('Cannot remove element from an empty List');
+		}
+		if (this.length == 1) {
+			this.start = this.last = null;
+			this.length = 0;
+		} else {
+			this.start = this.start.next;
+			this.length--;
+		}
+	}
+
+	removeLastItem() {
+		this.removeItemAtIndex(this.length - 1);
+	}
+
+	removeItemAtIndex(index) {
+		if (index >= this.length) {
+			throw new Error('Index greater than the length of List');
+		}
+		if (index == 0) {
+			this.removeFirstItem();
+		} else {
+			let currentNode = this.start;
+			let currentIndex = 0;
+			while (currentIndex < index - 1) {
+				currentNode = currentNode.next;
+				currentIndex++;
+			}
+			let deleteNode = currentNode.next;
+			currentNode.next = deleteNode.next;
+			if (index == this.length - 1) {
+				this.last = currentNode;
+			}
+			this.length--;
+		}
+	}
+
 	map(callback) {
 		let currentNode = this.start;
 		let index = 0;
