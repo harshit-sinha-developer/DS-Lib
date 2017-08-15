@@ -72,13 +72,42 @@ var DsLib =
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _LinkedList = __webpack_require__(1);
+
+Object.defineProperty(exports, 'LinkedList', {
+  enumerable: true,
+  get: function get() {
+    return _LinkedList.LinkedList;
+  }
+});
+
+var _QueueList = __webpack_require__(4);
+
+Object.defineProperty(exports, 'QueueList', {
+  enumerable: true,
+  get: function get() {
+    return _QueueList.QueueList;
+  }
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.LinkedList = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _LinkedListNode = __webpack_require__(1);
+var _LinkedListNode = __webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -264,7 +293,7 @@ var LinkedList = exports.LinkedList = function () {
 }();
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -275,7 +304,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LinkedListNode = undefined;
 
-var _DsNode = __webpack_require__(2);
+var _DsNode = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -299,7 +328,7 @@ var LinkedListNode = exports.LinkedListNode = function (_Node) {
 }(_DsNode.Node);
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -316,6 +345,71 @@ var Node = exports.Node = function Node() {
 
     this.data = null;
 };
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.QueueList = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _LinkedList = __webpack_require__(1);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var QueueList = exports.QueueList = function () {
+    function QueueList() {
+        _classCallCheck(this, QueueList);
+
+        this.list = new _LinkedList.LinkedList();
+    }
+
+    _createClass(QueueList, [{
+        key: 'enqueue',
+        value: function enqueue(item) {
+            this.list.addItem(item);
+        }
+    }, {
+        key: 'dequeue',
+        value: function dequeue() {
+            this.list.removeFirstItem();
+        }
+    }, {
+        key: 'isEmpty',
+        value: function isEmpty() {
+            return this.list.length == 0;
+        }
+    }, {
+        key: 'peek',
+        value: function peek() {
+            return this.list.getFirstItem();
+        }
+    }, {
+        key: 'map',
+        value: function map(callback) {
+            this.list.map(callback);
+        }
+    }, {
+        key: 'toArray',
+        value: function toArray() {
+            return this.list.toArray();
+        }
+    }, {
+        key: 'length',
+        get: function get() {
+            return this.list.length;
+        }
+    }]);
+
+    return QueueList;
+}();
 
 /***/ })
 /******/ ]);

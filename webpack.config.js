@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: './src/LinkedList.js',
+    entry: './src/index.js',
     output: {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './dist'),
