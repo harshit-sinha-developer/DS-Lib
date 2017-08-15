@@ -6,6 +6,17 @@ An implementation of basic Data Structures in JavaScript
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+## Contributing
+
+### Prerequisites
+1. ***Node.js*** - Download it from [here](https://nodejs.org/en/).
+2. ***Webpack*** - npm install webpack -g
+
+### Steps to setup locally
+1. git clone https://github.com/mauriciosantos/Buckets-JS.git
+2. npm install
+3. npm start
+
 ## Installing
 
 Download the [dist/bundle.js](https://github.com/harshit-sinha-developer/js-data_structures/blob/master/dist/bundle.js) file and include it into your scripts
