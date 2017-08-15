@@ -29,7 +29,7 @@ Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/b
 ```
 <script>
 
-var linkedList = new LinkedList();
+var linkedList = new DsLib.LinkedList();
 linkedList.addItem(1);
 linkedList.addItem(2);
 linkedList.addItem(3);
