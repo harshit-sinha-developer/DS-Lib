@@ -19,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Usage
 
-Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/bundle.js) file and include it into your scripts
+Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.js) file and include it into your scripts
 ```
 <script src="dslib.js"></script>
 ```
