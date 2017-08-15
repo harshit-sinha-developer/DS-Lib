@@ -2,30 +2,26 @@
 <html>
 <head>
 	<title></title>
-	<script src="build/scripts/script.min.js"></script>
+	<script src="dist/bundle.js"></script>
 </head>
 <body>
 <script>
 //alert('Hi User!! Please open your browser console');
-var li = new LinkedList();
-for(var i=10;i<30;i++){
-	li.addItem(i);
-}
+
+let li = new DsLib.LinkedList();
+
+li.addItem(1);
+li.addItem(2);
+li.addItem(3);
 
 
-//list traversal  data represents data at each node
-var q = new Queue();
-for(var j=10;j<30;j++)
-	q.enqueue(j);
+li.map((i, val) => {
+	console.log(i, val);
+});
 
-var st = new Stack();
-for(var k=10;k<30;k++)
-	st.push(k);
-
-var setList = new Set();
-for(var l=10;l<30;l++){
-	setList.add(l);
-}
+li.map((val) => {
+	console.log(val);
+})
 </script>
 </body>
 </html>
