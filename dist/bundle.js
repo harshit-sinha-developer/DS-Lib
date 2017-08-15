@@ -102,6 +102,15 @@ Object.defineProperty(exports, 'StackList', {
   }
 });
 
+var _HashSet = __webpack_require__(6);
+
+Object.defineProperty(exports, 'Set', {
+  enumerable: true,
+  get: function get() {
+    return _HashSet.Set;
+  }
+});
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -486,6 +495,76 @@ var StackList = exports.StackList = function () {
 
 	return StackList;
 }();
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.Set = Set;
+function Set() {
+	var set = {};
+	this.add = function (element) {
+		if (set[element] != undefined || typeof element == "undefined" || typeof element == "function") {
+			return false;
+		} else if ((typeof element === "undefined" ? "undefined" : _typeof(element)) == "object" && element != null) {
+			set[JSON.stringify(element)] = "object";
+		} else set[element] = typeof element === "undefined" ? "undefined" : _typeof(element);
+		return true;
+	};
+
+	this.testSet = function () {
+		return set;
+	};
+
+	this.remove = function (element) {
+		if ((typeof element === "undefined" ? "undefined" : _typeof(element)) == "object" && element != null) {
+			element = JSON.stringify(element);
+		} else if (typeof set[element] == "undefined" || typeof element == "undefined" || typeof element == "function") {
+			return false;
+		}
+		delete set[element];
+		return true;
+	};
+
+	this.contains = function (element) {
+		if (typeof set[element] == "undefined") {
+			return false;
+		}
+		return true;
+	};
+
+	this.toArray = function () {
+		var setArray = [];
+		for (var i in set) {
+			var iConverted = null;
+			switch (set[i]) {
+				case "number":
+					iConverted = Number(i);
+					break;
+				case "string":
+					iConverted = String(i);
+					break;
+				case "boolean":
+					iConverted = Boolean(i);
+					break;
+				case "object":
+					iConverted = JSON.parse(i);
+					break;
+			}
+			setArray.push(iConverted);
+		}
+		return setArray;
+	};
+}
 
 /***/ })
 /******/ ]);
