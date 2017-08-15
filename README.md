@@ -9,8 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 ## Contributing
 
 ### Prerequisites
-1. ***Node.js*** - Download it from [here](https://nodejs.org/en/).
-2. ***Webpack*** - npm install webpack -g
+1. **Node.js** - Download it from [here](https://nodejs.org/en/).
+2. **Webpack** - npm install webpack -g
 
 ### Steps to setup locally
 1. git clone https://github.com/mauriciosantos/Buckets-JS.git
