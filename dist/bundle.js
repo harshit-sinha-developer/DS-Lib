@@ -66,207 +66,256 @@ var DsLib =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_LinkedListNode__ = __webpack_require__(1);
 
 
-class LinkedList {
-	constructor() {
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.LinkedList = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _LinkedListNode = __webpack_require__(1);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LinkedList = exports.LinkedList = function () {
+	function LinkedList() {
+		_classCallCheck(this, LinkedList);
+
 		this.start = null;
 		this.last = null;
 		this.length = 0;
 	}
 
-	addItem(itemValue) {
-		// List is empty
-		let newNode = new __WEBPACK_IMPORTED_MODULE_0__common_LinkedListNode__["a" /* LinkedListNode */]();
-		newNode.data = itemValue;
-		newNode.next = null;
-
-		if (this.start == null) {
-			this.start = newNode;
-		} else {
-			this.last.next = newNode;
-		}
-		this.last = newNode;
-		this.length++;
-	}
-
-	addItemAtStart(itemValue) {
-		let newNode = new __WEBPACK_IMPORTED_MODULE_0__common_LinkedListNode__["a" /* LinkedListNode */]();
-		newNode.data = itemValue;
-		newNode.next = null;
-
-		if (this.start == null) {
-			this.start = newNode;
-			this.last = newNode;
-		} else {
-			newNode.next = this.start;
-			this.start = newNode;
-		}
-		this.length++;
-	}
-
-	addItemAtIndex(index, data) {
-		if (index > this.length) {
-			throw new Error('Index greater than the length of List');
-		} else if (index == this.length) {
-			this.addItem(data);
-		} else if (index == 0) {
-			this.addItemAtStart(data);
-		} else {
-			let newNode = new __WEBPACK_IMPORTED_MODULE_0__common_LinkedListNode__["a" /* LinkedListNode */]();
-			newNode.data = data;
+	_createClass(LinkedList, [{
+		key: 'addItem',
+		value: function addItem(itemValue) {
+			// List is empty
+			var newNode = new _LinkedListNode.LinkedListNode();
+			newNode.data = itemValue;
 			newNode.next = null;
-			let currentNode = this.start;
-			let currentIndex = 0;
-			while (currentIndex < index - 1) {
-				currentNode = currentNode.next;
-				currentIndex++;
+
+			if (this.start == null) {
+				this.start = newNode;
+			} else {
+				this.last.next = newNode;
 			}
-			let nextNode = currentNode.next;
-			currentNode.next = newNode;
-			newNode.next = nextNode;
+			this.last = newNode;
 			this.length++;
 		}
-	}
+	}, {
+		key: 'addItemAtStart',
+		value: function addItemAtStart(itemValue) {
+			var newNode = new _LinkedListNode.LinkedListNode();
+			newNode.data = itemValue;
+			newNode.next = null;
 
-	getLastItem() {
-		return this.last && this.last.data;
-	}
-
-	getFirstItem() {
-		return this.start && this.start.data;
-	}
-
-	getItemAtIndex(index) {
-		if (index >= this.length) {
-			throw new Error('Index greater than the length of List');
+			if (this.start == null) {
+				this.start = newNode;
+				this.last = newNode;
+			} else {
+				newNode.next = this.start;
+				this.start = newNode;
+			}
+			this.length++;
 		}
-		if (index == this.length - 1) {
-			return this.getLastItem();
+	}, {
+		key: 'addItemAtIndex',
+		value: function addItemAtIndex(index, data) {
+			if (index > this.length) {
+				throw new Error('Index greater than the length of List');
+			} else if (index == this.length) {
+				this.addItem(data);
+			} else if (index == 0) {
+				this.addItemAtStart(data);
+			} else {
+				var newNode = new _LinkedListNode.LinkedListNode();
+				newNode.data = data;
+				newNode.next = null;
+				var currentNode = this.start;
+				var currentIndex = 0;
+				while (currentIndex < index - 1) {
+					currentNode = currentNode.next;
+					currentIndex++;
+				}
+				var nextNode = currentNode.next;
+				currentNode.next = newNode;
+				newNode.next = nextNode;
+				this.length++;
+			}
 		}
-		if (index == 0) {
-			return this.getFirstItem();
+	}, {
+		key: 'getLastItem',
+		value: function getLastItem() {
+			return this.last && this.last.data;
 		}
-		let currentNode = this.start;
-		let currentIndex = 0;
-		while (currentIndex < index) {
-			currentNode = currentNode.next;
-			currentIndex++;
+	}, {
+		key: 'getFirstItem',
+		value: function getFirstItem() {
+			return this.start && this.start.data;
 		}
-		return currentNode.data;
-	}
-
-	removeFirstItem() {
-		if (this.start == null) {
-			throw new Error('Cannot remove element from an empty List');
-		}
-		if (this.length == 1) {
-			this.start = this.last = null;
-			this.length = 0;
-		} else {
-			this.start = this.start.next;
-			this.length--;
-		}
-	}
-
-	removeLastItem() {
-		this.removeItemAtIndex(this.length - 1);
-	}
-
-	removeItemAtIndex(index) {
-		if (index >= this.length) {
-			throw new Error('Index greater than the length of List');
-		}
-		if (index == 0) {
-			this.removeFirstItem();
-		} else {
-			let currentNode = this.start;
-			let currentIndex = 0;
-			while (currentIndex < index - 1) {
+	}, {
+		key: 'getItemAtIndex',
+		value: function getItemAtIndex(index) {
+			if (index >= this.length) {
+				throw new Error('Index greater than the length of List');
+			}
+			if (index == this.length - 1) {
+				return this.getLastItem();
+			}
+			if (index == 0) {
+				return this.getFirstItem();
+			}
+			var currentNode = this.start;
+			var currentIndex = 0;
+			while (currentIndex < index) {
 				currentNode = currentNode.next;
 				currentIndex++;
 			}
-			let deleteNode = currentNode.next;
-			currentNode.next = deleteNode.next;
-			if (index == this.length - 1) {
-				this.last = currentNode;
+			return currentNode.data;
+		}
+	}, {
+		key: 'removeFirstItem',
+		value: function removeFirstItem() {
+			if (this.start == null) {
+				throw new Error('Cannot remove element from an empty List');
 			}
-			this.length--;
-		}
-	}
-
-	updateItem(index, value) {
-		if (index >= this.length) {
-			throw new Error('Index greater than the length of List');
-		}
-		let currentNode = this.start;
-		let currentIndex = 0;
-		while (currentIndex < index) {
-			currentNode = currentNode.next;
-			currentIndex++;
-		}
-		currentNode.data = value;
-	}
-
-	map(callback) {
-		let currentNode = this.start;
-		let index = 0;
-		while (currentNode !== null) {
-			if (callback.length == 2) {
-				callback(index, currentNode.data);
+			if (this.length == 1) {
+				this.start = this.last = null;
+				this.length = 0;
 			} else {
-				callback(currentNode.data);
+				this.start = this.start.next;
+				this.length--;
 			}
-			currentNode = currentNode.next;
-			index++;
 		}
-	}
+	}, {
+		key: 'removeLastItem',
+		value: function removeLastItem() {
+			this.removeItemAtIndex(this.length - 1);
+		}
+	}, {
+		key: 'removeItemAtIndex',
+		value: function removeItemAtIndex(index) {
+			if (index >= this.length) {
+				throw new Error('Index greater than the length of List');
+			}
+			if (index == 0) {
+				this.removeFirstItem();
+			} else {
+				var currentNode = this.start;
+				var currentIndex = 0;
+				while (currentIndex < index - 1) {
+					currentNode = currentNode.next;
+					currentIndex++;
+				}
+				var deleteNode = currentNode.next;
+				currentNode.next = deleteNode.next;
+				if (index == this.length - 1) {
+					this.last = currentNode;
+				}
+				this.length--;
+			}
+		}
+	}, {
+		key: 'updateItem',
+		value: function updateItem(index, value) {
+			if (index >= this.length) {
+				throw new Error('Index greater than the length of List');
+			}
+			var currentNode = this.start;
+			var currentIndex = 0;
+			while (currentIndex < index) {
+				currentNode = currentNode.next;
+				currentIndex++;
+			}
+			currentNode.data = value;
+		}
+	}, {
+		key: 'map',
+		value: function map(callback) {
+			var currentNode = this.start;
+			var index = 0;
+			while (currentNode !== null) {
+				if (callback.length == 2) {
+					callback(index, currentNode.data);
+				} else {
+					callback(currentNode.data);
+				}
+				currentNode = currentNode.next;
+				index++;
+			}
+		}
+	}, {
+		key: 'toArray',
+		value: function toArray() {
+			var listArray = [];
+			this.map(function (value) {
+				listArray.push(value);
+			});
+			return listArray;
+		}
+	}]);
 
-	toArray() {
-		let listArray = [];
-		this.map(value => {
-			listArray.push(value);
-		});
-		return listArray;
-	}
-}
-/* harmony export (immutable) */ __webpack_exports__["LinkedList"] = LinkedList;
-
+	return LinkedList;
+}();
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DsNode__ = __webpack_require__(2);
 
 
-class LinkedListNode extends __WEBPACK_IMPORTED_MODULE_0__DsNode__["a" /* Node */] {
-    constructor() {
-        super();
-        this.next = null;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.LinkedListNode = undefined;
+
+var _DsNode = __webpack_require__(2);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LinkedListNode = exports.LinkedListNode = function (_Node) {
+    _inherits(LinkedListNode, _Node);
+
+    function LinkedListNode() {
+        _classCallCheck(this, LinkedListNode);
+
+        var _this = _possibleConstructorReturn(this, (LinkedListNode.__proto__ || Object.getPrototypeOf(LinkedListNode)).call(this));
+
+        _this.next = null;
+        return _this;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = LinkedListNode;
 
+    return LinkedListNode;
+}(_DsNode.Node);
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-class Node {
-    constructor() {
-        this.data = null;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Node;
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Node = exports.Node = function Node() {
+    _classCallCheck(this, Node);
+
+    this.data = null;
+};
 
 /***/ })
 /******/ ]);
