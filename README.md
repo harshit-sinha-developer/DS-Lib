@@ -13,13 +13,13 @@ These instructions will get you a copy of the project up and running on your loc
 2. **Webpack** - npm install webpack -g
 
 ### Steps to setup locally
-1. git clone https://github.com/mauriciosantos/Buckets-JS.git
+1. git clone https://github.com/harshit-sinha-developer/DS-Lib.git
 2. npm install
 3. npm start
 
 ## Usage
 
-Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/js-data_structures/blob/master/dist/bundle.js) file and include it into your scripts
+Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/bundle.js) file and include it into your scripts
 ```
 <script src="dslib.js"></script>
 ```
