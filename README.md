@@ -25,7 +25,7 @@ Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/b
 ```
 ## Included Data Structures
 
-1. Linked List
+### 1. Linked List
 ```
 <script>
 
@@ -58,7 +58,7 @@ console.log(linkedList.toArray())
 </script>
 ```
 
-2. Queue
+### 2. Queue
 ```
 var queue = new DsLib.QueueList();
 queue.enqueue(1);
@@ -91,7 +91,7 @@ queue.map(function(value) {
 // 6
 ```
 
-3. Stack
+### 3. Stack
 ```
 var stack = new DsLib.StackList();
 stack.push(1);
