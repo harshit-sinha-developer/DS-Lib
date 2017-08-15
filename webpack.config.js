@@ -6,7 +6,7 @@ module.exports = {
     output: {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.js',
+        filename: 'dslib.js',
         libraryTarget: "var",
         // name of the global var: "Foo"
         library: "DsLib"
