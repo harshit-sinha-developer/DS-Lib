@@ -127,6 +127,19 @@ export class LinkedList {
 		}
 	}
 
+	updateItem(index, value) {
+		if(index >= this.length) {
+			throw new Error('Index greater than the length of List');
+		}
+		let currentNode = this.start;
+		let currentIndex = 0;
+		while(currentIndex < index) {
+			currentNode = currentNode.next;
+			currentIndex++;
+		}
+		currentNode.data = value;
+	}
+
 	map(callback) {
 		let currentNode = this.start;
 		let index = 0;
