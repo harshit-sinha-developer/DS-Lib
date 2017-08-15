@@ -79,3 +79,24 @@ queue.map(function(value) {
 // 5
 // 6
 ```
+
+3. Stack
+```
+var stack = new DsLib.StackList();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+stack.push(5);
+stack.push(6);
+
+console.log(stack.toArray());
+// Output
+// [1, 2, 3, 4, 5, 6]
+
+stack.pop();
+stack.pop();
+// Output
+// [1, 2, 3, 4]
+console.log(stack.toArray());
+```
