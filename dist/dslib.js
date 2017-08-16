@@ -81,7 +81,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 exports.LinkedList = undefined;
 
@@ -92,184 +92,198 @@ var _LinkedListNode = __webpack_require__(2);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var LinkedList = exports.LinkedList = function () {
-	function LinkedList() {
-		_classCallCheck(this, LinkedList);
+    // Private members
+    var _start = void 0;
+    var _last = void 0;
+    var _length = void 0;
 
-		this.start = null;
-		this.last = null;
-		this.length = 0;
-	}
+    var _LinkedList = function () {
+        function _LinkedList() {
+            _classCallCheck(this, _LinkedList);
 
-	_createClass(LinkedList, [{
-		key: 'addItem',
-		value: function addItem(itemValue) {
-			// List is empty
-			var newNode = new _LinkedListNode.LinkedListNode();
-			newNode.data = itemValue;
-			newNode.next = null;
+            _start = null;
+            _last = null;
+            _length = 0;
+        }
 
-			if (this.start == null) {
-				this.start = newNode;
-			} else {
-				this.last.next = newNode;
-			}
-			this.last = newNode;
-			this.length++;
-		}
-	}, {
-		key: 'addItemAtStart',
-		value: function addItemAtStart(itemValue) {
-			var newNode = new _LinkedListNode.LinkedListNode();
-			newNode.data = itemValue;
-			newNode.next = null;
+        _createClass(_LinkedList, [{
+            key: 'addItem',
+            value: function addItem(itemValue) {
+                // List is empty
+                var newNode = new _LinkedListNode.LinkedListNode();
+                newNode.data = itemValue;
+                newNode.next = null;
 
-			if (this.start == null) {
-				this.start = newNode;
-				this.last = newNode;
-			} else {
-				newNode.next = this.start;
-				this.start = newNode;
-			}
-			this.length++;
-		}
-	}, {
-		key: 'addItemAtIndex',
-		value: function addItemAtIndex(index, data) {
-			if (index > this.length) {
-				throw new Error('Index greater than the length of List');
-			} else if (index == this.length) {
-				this.addItem(data);
-			} else if (index == 0) {
-				this.addItemAtStart(data);
-			} else {
-				var newNode = new _LinkedListNode.LinkedListNode();
-				newNode.data = data;
-				newNode.next = null;
-				var currentNode = this.start;
-				var currentIndex = 0;
-				while (currentIndex < index - 1) {
-					currentNode = currentNode.next;
-					currentIndex++;
-				}
-				var nextNode = currentNode.next;
-				currentNode.next = newNode;
-				newNode.next = nextNode;
-				this.length++;
-			}
-		}
-	}, {
-		key: 'getLastItem',
-		value: function getLastItem() {
-			return this.last && this.last.data;
-		}
-	}, {
-		key: 'getFirstItem',
-		value: function getFirstItem() {
-			return this.start && this.start.data;
-		}
-	}, {
-		key: 'getItemAtIndex',
-		value: function getItemAtIndex(index) {
-			if (index >= this.length) {
-				throw new Error('Index greater than the length of List');
-			}
-			if (index == this.length - 1) {
-				return this.getLastItem();
-			}
-			if (index == 0) {
-				return this.getFirstItem();
-			}
-			var currentNode = this.start;
-			var currentIndex = 0;
-			while (currentIndex < index) {
-				currentNode = currentNode.next;
-				currentIndex++;
-			}
-			return currentNode.data;
-		}
-	}, {
-		key: 'removeFirstItem',
-		value: function removeFirstItem() {
-			if (this.start == null) {
-				throw new Error('Cannot remove element from an empty List');
-			}
-			if (this.length == 1) {
-				this.start = this.last = null;
-				this.length = 0;
-			} else {
-				this.start = this.start.next;
-				this.length--;
-			}
-		}
-	}, {
-		key: 'removeLastItem',
-		value: function removeLastItem() {
-			this.removeItemAtIndex(this.length - 1);
-		}
-	}, {
-		key: 'removeItemAtIndex',
-		value: function removeItemAtIndex(index) {
-			if (index >= this.length) {
-				throw new Error('Index greater than the length of List');
-			}
-			if (index == 0) {
-				this.removeFirstItem();
-			} else {
-				var currentNode = this.start;
-				var currentIndex = 0;
-				while (currentIndex < index - 1) {
-					currentNode = currentNode.next;
-					currentIndex++;
-				}
-				var deleteNode = currentNode.next;
-				currentNode.next = deleteNode.next;
-				if (index == this.length - 1) {
-					this.last = currentNode;
-				}
-				this.length--;
-			}
-		}
-	}, {
-		key: 'updateItem',
-		value: function updateItem(index, value) {
-			if (index >= this.length) {
-				throw new Error('Index greater than the length of List');
-			}
-			var currentNode = this.start;
-			var currentIndex = 0;
-			while (currentIndex < index) {
-				currentNode = currentNode.next;
-				currentIndex++;
-			}
-			currentNode.data = value;
-		}
-	}, {
-		key: 'map',
-		value: function map(callback) {
-			var currentNode = this.start;
-			var index = 0;
-			while (currentNode !== null) {
-				if (callback.length == 2) {
-					callback(index, currentNode.data);
-				} else {
-					callback(currentNode.data);
-				}
-				currentNode = currentNode.next;
-				index++;
-			}
-		}
-	}, {
-		key: 'toArray',
-		value: function toArray() {
-			var listArray = [];
-			this.map(function (value) {
-				listArray.push(value);
-			});
-			return listArray;
-		}
-	}]);
+                if (_start == null) {
+                    _start = newNode;
+                } else {
+                    _last.next = newNode;
+                }
+                _last = newNode;
+                _length++;
+            }
+        }, {
+            key: 'addItemAtStart',
+            value: function addItemAtStart(itemValue) {
+                var newNode = new _LinkedListNode.LinkedListNode();
+                newNode.data = itemValue;
+                newNode.next = null;
 
-	return LinkedList;
+                if (_start == null) {
+                    _start = newNode;
+                    _last = newNode;
+                } else {
+                    newNode.next = _start;
+                    _start = newNode;
+                }
+                _length++;
+            }
+        }, {
+            key: 'addItemAtIndex',
+            value: function addItemAtIndex(index, data) {
+                if (index > _length) {
+                    throw new Error('Index greater than the length of List');
+                } else if (index == _length) {
+                    this.addItem(data);
+                } else if (index == 0) {
+                    this.addItemAtStart(data);
+                } else {
+                    var newNode = new _LinkedListNode.LinkedListNode();
+                    newNode.data = data;
+                    newNode.next = null;
+                    var currentNode = _start;
+                    var currentIndex = 0;
+                    while (currentIndex < index - 1) {
+                        currentNode = currentNode.next;
+                        currentIndex++;
+                    }
+                    var nextNode = currentNode.next;
+                    currentNode.next = newNode;
+                    newNode.next = nextNode;
+                    _length++;
+                }
+            }
+        }, {
+            key: 'getLastItem',
+            value: function getLastItem() {
+                return _last && _last.data;
+            }
+        }, {
+            key: 'getFirstItem',
+            value: function getFirstItem() {
+                return _start && _start.data;
+            }
+        }, {
+            key: 'getItemAtIndex',
+            value: function getItemAtIndex(index) {
+                if (index >= _length) {
+                    throw new Error('Index greater than the length of List');
+                }
+                if (index == _length - 1) {
+                    return this.getLastItem();
+                }
+                if (index == 0) {
+                    return this.getFirstItem();
+                }
+                var currentNode = _start;
+                var currentIndex = 0;
+                while (currentIndex < index) {
+                    currentNode = currentNode.next;
+                    currentIndex++;
+                }
+                return currentNode.data;
+            }
+        }, {
+            key: 'removeFirstItem',
+            value: function removeFirstItem() {
+                if (_start == null) {
+                    throw new Error('Cannot remove element from an empty List');
+                }
+                if (_length == 1) {
+                    _start = _last = null;
+                    _length = 0;
+                } else {
+                    _start = _start.next;
+                    _length--;
+                }
+            }
+        }, {
+            key: 'removeLastItem',
+            value: function removeLastItem() {
+                this.removeItemAtIndex(_length - 1);
+            }
+        }, {
+            key: 'removeItemAtIndex',
+            value: function removeItemAtIndex(index) {
+                if (index >= _length) {
+                    throw new Error('Index greater than the length of List');
+                }
+                if (index == 0) {
+                    this.removeFirstItem();
+                } else {
+                    var currentNode = _start;
+                    var currentIndex = 0;
+                    while (currentIndex < index - 1) {
+                        currentNode = currentNode.next;
+                        currentIndex++;
+                    }
+                    var deleteNode = currentNode.next;
+                    currentNode.next = deleteNode.next;
+                    if (index == _length - 1) {
+                        _last = currentNode;
+                    }
+                    _length--;
+                }
+            }
+        }, {
+            key: 'updateItem',
+            value: function updateItem(index, value) {
+                if (index >= _length) {
+                    throw new Error('Index greater than the length of List');
+                }
+                var currentNode = _start;
+                var currentIndex = 0;
+                while (currentIndex < index) {
+                    currentNode = currentNode.next;
+                    currentIndex++;
+                }
+                currentNode.data = value;
+            }
+        }, {
+            key: 'map',
+            value: function map(callback) {
+                var currentNode = _start;
+                var index = 0;
+                while (currentNode !== null) {
+                    if (callback.length == 2) {
+                        callback(index, currentNode.data);
+                    } else {
+                        callback(currentNode.data);
+                    }
+                    currentNode = currentNode.next;
+                    index++;
+                }
+            }
+        }, {
+            key: 'toArray',
+            value: function toArray() {
+                var listArray = [];
+                this.map(function (value) {
+                    listArray.push(value);
+                });
+                return listArray;
+            }
+        }, {
+            key: 'length',
+            get: function get() {
+                return _length;
+            }
+        }]);
+
+        return _LinkedList;
+    }();
+
+    return _LinkedList;
 }();
 
 /***/ }),

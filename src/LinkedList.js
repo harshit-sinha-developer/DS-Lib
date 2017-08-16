@@ -1,164 +1,175 @@
 import { LinkedListNode } from './common/LinkedListNode';
+export const LinkedList = (function() {
+    // Private members
+    let _start;
+    let _last;
+    let _length;
 
-export class LinkedList {
-	constructor() {
-		this.start = null;
-		this.last = null;
-		this.length = 0;
-	}
+    class _LinkedList {
+        constructor() {
+            _start = null;
+            _last = null;
+            _length = 0;
+        }
 
-	addItem(itemValue) {
-		// List is empty
-		let newNode = new LinkedListNode();
-		newNode.data = itemValue;
-		newNode.next = null;
+        get length() {
+            return _length;
+        }
 
-		if (this.start == null) {
-			this.start = newNode;
-		} else {
-			this.last.next = newNode;
-		}
-		this.last = newNode;
-		this.length++;
-	}
+        addItem(itemValue) {
+            // List is empty
+            let newNode = new LinkedListNode();
+            newNode.data = itemValue;
+            newNode.next = null;
 
-	addItemAtStart(itemValue) {
-		let newNode = new LinkedListNode();
-		newNode.data = itemValue;
-		newNode.next = null;
+            if (_start == null) {
+                _start = newNode;
+            } else {
+                _last.next = newNode;
+            }
+            _last = newNode;
+            _length++;
+        }
 
-		if (this.start == null) {
-			this.start = newNode;
-			this.last = newNode;
-		} else {
-			newNode.next = this.start;
-			this.start = newNode;
-		}
-		this.length++;
-	}
+        addItemAtStart(itemValue) {
+            let newNode = new LinkedListNode();
+            newNode.data = itemValue;
+            newNode.next = null;
 
-	addItemAtIndex(index, data) {
-		if (index > this.length) {
-			throw new Error('Index greater than the length of List');
-		} else if (index == this.length) {
-			this.addItem(data);
-		} else if (index == 0) {
-			this.addItemAtStart(data);
-		} else {
-			let newNode = new LinkedListNode();
-			newNode.data = data;
-			newNode.next = null;
-			let currentNode = this.start;
-			let currentIndex = 0;
-			while (currentIndex < index - 1) {
-				currentNode = currentNode.next;
-				currentIndex++;
-			}
-			let nextNode = currentNode.next;
-			currentNode.next = newNode;
-			newNode.next = nextNode;
-			this.length++;
-		}
-	}
+            if (_start == null) {
+                _start = newNode;
+                _last = newNode;
+            } else {
+                newNode.next = _start;
+                _start = newNode;
+            }
+            _length++;
+        }
 
-	getLastItem() {
-		return this.last && this.last.data;
-	}
+        addItemAtIndex(index, data) {
+            if (index > _length) {
+                throw new Error('Index greater than the length of List');
+            } else if (index == _length) {
+                this.addItem(data);
+            } else if (index == 0) {
+                this.addItemAtStart(data);
+            } else {
+                let newNode = new LinkedListNode();
+                newNode.data = data;
+                newNode.next = null;
+                let currentNode = _start;
+                let currentIndex = 0;
+                while (currentIndex < index - 1) {
+                    currentNode = currentNode.next;
+                    currentIndex++;
+                }
+                let nextNode = currentNode.next;
+                currentNode.next = newNode;
+                newNode.next = nextNode;
+                _length++;
+            }
+        }
 
-	getFirstItem() {
-		return this.start && this.start.data;
-	}
+        getLastItem() {
+            return _last && _last.data;
+        }
 
-	getItemAtIndex(index) {
-		if (index >= this.length) {
-			throw new Error('Index greater than the length of List');
-		}
-		if (index == this.length - 1) {
-			return this.getLastItem();
-		}
-		if (index == 0) {
-			return this.getFirstItem();
-		}
-		let currentNode = this.start;
-		let currentIndex = 0;
-		while (currentIndex < index) {
-			currentNode = currentNode.next;
-			currentIndex++;
-		}
-		return currentNode.data;
-	}
+        getFirstItem() {
+            return _start && _start.data;
+        }
 
-	removeFirstItem() {
-		if (this.start == null) {
-			throw new Error('Cannot remove element from an empty List');
-		}
-		if (this.length == 1) {
-			this.start = this.last = null;
-			this.length = 0;
-		} else {
-			this.start = this.start.next;
-			this.length--;
-		}
-	}
+        getItemAtIndex(index) {
+            if (index >= _length) {
+                throw new Error('Index greater than the length of List');
+            }
+            if (index == _length - 1) {
+                return this.getLastItem();
+            }
+            if (index == 0) {
+                return this.getFirstItem();
+            }
+            let currentNode = _start;
+            let currentIndex = 0;
+            while (currentIndex < index) {
+                currentNode = currentNode.next;
+                currentIndex++;
+            }
+            return currentNode.data;
+        }
 
-	removeLastItem() {
-		this.removeItemAtIndex(this.length - 1);
-	}
+        removeFirstItem() {
+            if (_start == null) {
+                throw new Error('Cannot remove element from an empty List');
+            }
+            if (_length == 1) {
+                _start = _last = null;
+                _length = 0;
+            } else {
+                _start = _start.next;
+                _length--;
+            }
+        }
 
-	removeItemAtIndex(index) {
-		if (index >= this.length) {
-			throw new Error('Index greater than the length of List');
-		}
-		if (index == 0) {
-			this.removeFirstItem();
-		} else {
-			let currentNode = this.start;
-			let currentIndex = 0;
-			while (currentIndex < index - 1) {
-				currentNode = currentNode.next;
-				currentIndex++;
-			}
-			let deleteNode = currentNode.next;
-			currentNode.next = deleteNode.next;
-			if (index == this.length - 1) {
-				this.last = currentNode;
-			}
-			this.length--;
-		}
-	}
+        removeLastItem() {
+            this.removeItemAtIndex(_length - 1);
+        }
 
-	updateItem(index, value) {
-		if(index >= this.length) {
-			throw new Error('Index greater than the length of List');
-		}
-		let currentNode = this.start;
-		let currentIndex = 0;
-		while(currentIndex < index) {
-			currentNode = currentNode.next;
-			currentIndex++;
-		}
-		currentNode.data = value;
-	}
+        removeItemAtIndex(index) {
+            if (index >= _length) {
+                throw new Error('Index greater than the length of List');
+            }
+            if (index == 0) {
+                this.removeFirstItem();
+            } else {
+                let currentNode = _start;
+                let currentIndex = 0;
+                while (currentIndex < index - 1) {
+                    currentNode = currentNode.next;
+                    currentIndex++;
+                }
+                let deleteNode = currentNode.next;
+                currentNode.next = deleteNode.next;
+                if (index == _length - 1) {
+                    _last = currentNode;
+                }
+                _length--;
+            }
+        }
 
-	map(callback) {
-		let currentNode = this.start;
-		let index = 0;
-		while (currentNode !== null) {
-			if (callback.length == 2) {
-				callback(index, currentNode.data);
-			} else {
-				callback(currentNode.data);
-			}
-			currentNode = currentNode.next;
-			index++;
-		}
-	}
+        updateItem(index, value) {
+            if (index >= _length) {
+                throw new Error('Index greater than the length of List');
+            }
+            let currentNode = _start;
+            let currentIndex = 0;
+            while (currentIndex < index) {
+                currentNode = currentNode.next;
+                currentIndex++;
+            }
+            currentNode.data = value;
+        }
 
-	toArray() {
-		let listArray = [];
-		this.map((value) => {
-			listArray.push(value);
-		})
-		return listArray;
-	}
-}
+        map(callback) {
+            let currentNode = _start;
+            let index = 0;
+            while (currentNode !== null) {
+                if (callback.length == 2) {
+                    callback(index, currentNode.data);
+                } else {
+                    callback(currentNode.data);
+                }
+                currentNode = currentNode.next;
+                index++;
+            }
+        }
+
+        toArray() {
+            let listArray = [];
+            this.map((value) => {
+                listArray.push(value);
+            })
+            return listArray;
+        }
+    }
+    return _LinkedList;
+})();
