@@ -13,7 +13,7 @@ To use the Library in browser Download the [dist/dslib.js](https://github.com/ha
 #### Node.js
 1. To use the Library in Node.js install the Library through npm
 ```
-> npm install ds-lib --save
+npm install ds-lib --save
 ```
 2. Include the library in your source code
 ```
@@ -24,8 +24,6 @@ var DsLib = require('ds-lib');
 
 ### 1. Linked List
 ```
-<script>
-
 var linkedList = new DsLib.LinkedList();
 linkedList.addItem(1);
 linkedList.addItem(2);
@@ -52,7 +50,6 @@ console.log(linkedList.toArray())
 
 // Output
 // [1, 2, 3, 4, 5, 6, 7]
-</script>
 ```
 
 ### 2. Queue
