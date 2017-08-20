@@ -1,5 +1,15 @@
+/**
+ * Node class
+ * 
+ * @export
+ * @class Node
+ */
 export class Node {
-    constructor() {
-        this.data = null;
-    }
+  /**
+   * Creates an instance of Node.
+   * @memberof Node
+   */
+  constructor() {
+    this.data = null;
+  }
 }
