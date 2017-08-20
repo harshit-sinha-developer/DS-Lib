@@ -6,7 +6,7 @@ module.exports = {
     output: {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './dist'),
-        filename: 'dslib.js',
+        filename: 'dslib.min.js',
         libraryTarget: "umd",
         // name of the global var: "Foo"
         library: "DsLib"
@@ -25,7 +25,9 @@ module.exports = {
             }
         ]
     },
-    plugins: [],
-    watch: true,
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ],
+    watch: false,
     devtool: 'source-map'
 }
