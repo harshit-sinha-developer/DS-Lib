@@ -5,9 +5,9 @@ An implementation of basic Data Structures in JavaScript
 ## Getting Started
 
 #### In Browser
-To use the Library in browser Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.js) file and include it into your scripts
+To use the Library in browser Download the [dist/dslib.min.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.min.js) file and include it into your scripts
 ```
-<script src="dslib.js"></script>
+<script src="dslib.min.js"></script>
 ```
 
 #### Node.js
@@ -19,6 +19,9 @@ npm install ds-lib --save
 ```
 var DsLib = require('ds-lib');
 ```
+
+## API Documentation
+For the complete API reference, please [refer](https://github.com/harshit-sinha-developer/DS-Lib/wiki)
 
 ## Included Data Structures
 
