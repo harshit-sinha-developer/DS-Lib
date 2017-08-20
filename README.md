@@ -4,21 +4,6 @@ An implementation of basic Data Structures in JavaScript
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
-
-## Contributing
-
-### Prerequisites
-1. **Node.js** - Download it from [here](https://nodejs.org/en/).
-2. **Webpack** - npm install webpack -g
-
-### Steps to setup locally
-1. git clone https://github.com/harshit-sinha-developer/DS-Lib.git
-2. npm install
-3. npm start
-
-## Usage
-
 #### In Browser
 To use the Library in browser Download the [dist/dslib.js](https://github.com/harshit-sinha-developer/DS-Lib/blob/master/dist/dslib.js) file and include it into your scripts
 ```
@@ -123,3 +108,14 @@ stack.pop();
 // [1, 2, 3, 4]
 console.log(stack.toArray());
 ```
+
+## Contributing
+
+### Prerequisites
+1. **Node.js** - Download it from [here](https://nodejs.org/en/).
+2. **Webpack** - npm install webpack -g
+
+### Steps to setup locally
+1. git clone https://github.com/harshit-sinha-developer/DS-Lib.git
+2. npm install
+3. npm start
