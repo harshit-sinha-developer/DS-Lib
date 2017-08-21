@@ -130,278 +130,264 @@ var LinkedList = exports.LinkedList = function () {
      */
 
 
-    _createClass(_LinkedList, [{
-      key: 'addItem',
+    /**
+     * Adds a new item in the tail of linked list
+     * 
+     * @param {any} itemValue Item to be added
+     * @returns {void} 
+     * @memberof _LinkedList
+     */
+    _LinkedList.prototype.addItem = function addItem(itemValue) {
+      var newNode = new _LinkedListNode.LinkedListNode();
+      newNode.data = itemValue;
+      newNode.next = null;
+
+      if (_start == null) {
+        _start = newNode;
+      } else {
+        _last.next = newNode;
+      }
+      _last = newNode;
+      _length++;
+    };
+
+    /**
+     * Adds an item at the head of the linked list
+     * 
+     * @param {any} itemValue Item to be added
+     * @returns {void}
+     * @memberof _LinkedList
+     */
 
 
-      /**
-       * Adds a new item in the tail of linked list
-       * 
-       * @param {any} itemValue Item to be added
-       * @returns {void} 
-       * @memberof _LinkedList
-       */
-      value: function addItem(itemValue) {
-        var newNode = new _LinkedListNode.LinkedListNode();
-        newNode.data = itemValue;
-        newNode.next = null;
+    _LinkedList.prototype.addItemAtStart = function addItemAtStart(itemValue) {
+      var newNode = new _LinkedListNode.LinkedListNode();
+      newNode.data = itemValue;
+      newNode.next = null;
 
-        if (_start == null) {
-          _start = newNode;
-        } else {
-          _last.next = newNode;
-        }
+      if (_start == null) {
+        _start = newNode;
         _last = newNode;
-        _length++;
+      } else {
+        newNode.next = _start;
+        _start = newNode;
       }
+      _length++;
+    };
 
-      /**
-       * Adds an item at the head of the linked list
-       * 
-       * @param {any} itemValue Item to be added
-       * @returns {void}
-       * @memberof _LinkedList
-       */
+    /**
+     * Adds an item in the linked list at the given index
+     * 
+     * @param {number} index Index
+     * @param {any} data Item to be added
+     * @returns {void}
+     * @memberof _LinkedList
+     */
 
-    }, {
-      key: 'addItemAtStart',
-      value: function addItemAtStart(itemValue) {
+
+    _LinkedList.prototype.addItemAtIndex = function addItemAtIndex(index, data) {
+      if (index > _length) {
+        throw new Error('Index greater than the length of List');
+      } else if (index == _length) {
+        this.addItem(data);
+      } else if (index == 0) {
+        this.addItemAtStart(data);
+      } else {
         var newNode = new _LinkedListNode.LinkedListNode();
-        newNode.data = itemValue;
+        newNode.data = data;
         newNode.next = null;
-
-        if (_start == null) {
-          _start = newNode;
-          _last = newNode;
-        } else {
-          newNode.next = _start;
-          _start = newNode;
+        var currentNode = _start;
+        var currentIndex = 0;
+        while (currentIndex < index - 1) {
+          currentNode = currentNode.next;
+          currentIndex++;
         }
+        var nextNode = currentNode.next;
+        currentNode.next = newNode;
+        newNode.next = nextNode;
         _length++;
       }
+    };
 
-      /**
-       * Adds an item in the linked list at the given index
-       * 
-       * @param {number} index Index
-       * @param {any} data Item to be added
-       * @returns {void}
-       * @memberof _LinkedList
-       */
+    /**
+     * Gets the last item of the linked list
+     * 
+     * @returns {any} The last item
+     * @memberof _LinkedList
+     */
 
-    }, {
-      key: 'addItemAtIndex',
-      value: function addItemAtIndex(index, data) {
-        if (index > _length) {
-          throw new Error('Index greater than the length of List');
-        } else if (index == _length) {
-          this.addItem(data);
-        } else if (index == 0) {
-          this.addItemAtStart(data);
-        } else {
-          var newNode = new _LinkedListNode.LinkedListNode();
-          newNode.data = data;
-          newNode.next = null;
-          var currentNode = _start;
-          var currentIndex = 0;
-          while (currentIndex < index - 1) {
-            currentNode = currentNode.next;
-            currentIndex++;
-          }
-          var nextNode = currentNode.next;
-          currentNode.next = newNode;
-          newNode.next = nextNode;
-          _length++;
+
+    _LinkedList.prototype.getLastItem = function getLastItem() {
+      return _last && _last.data;
+    };
+
+    /**
+     * Gets the first item of the linked list
+     * 
+     * @returns {any} The first item
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.getFirstItem = function getFirstItem() {
+      return _start && _start.data;
+    };
+
+    /**
+     * Gets an item from the linked list at the given index
+     * 
+     * @param {number} index Index
+     * @returns {any} The item
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.getItemAtIndex = function getItemAtIndex(index) {
+      if (index >= _length) {
+        throw new Error('Index greater than the length of List');
+      }
+      if (index == _length - 1) {
+        return this.getLastItem();
+      }
+      if (index == 0) {
+        return this.getFirstItem();
+      }
+      var currentNode = _start;
+      var currentIndex = 0;
+      while (currentIndex < index) {
+        currentNode = currentNode.next;
+        currentIndex++;
+      }
+      return currentNode.data;
+    };
+
+    /**
+     * Removes the first item from the linked list
+     * 
+     * @returns {void}
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.removeFirstItem = function removeFirstItem() {
+      if (_start == null) {
+        throw new Error('Cannot remove element from an empty List');
+      }
+      if (_length == 1) {
+        _start = _last = null;
+        _length = 0;
+      } else {
+        _start = _start.next;
+        _length--;
+      }
+    };
+
+    /**
+     * Removes the last item from the linked list
+     * 
+     * @returns {void}
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.removeLastItem = function removeLastItem() {
+      this.removeItemAtIndex(_length - 1);
+    };
+
+    /**
+     * Removes an item at the given index of linked list
+     * 
+     * @param {number} index 
+     * @returns {void}
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.removeItemAtIndex = function removeItemAtIndex(index) {
+      if (index >= _length) {
+        throw new Error('Index greater than the length of List');
+      }
+      if (index == 0) {
+        this.removeFirstItem();
+      } else {
+        var currentNode = _start;
+        var currentIndex = 0;
+        while (currentIndex < index - 1) {
+          currentNode = currentNode.next;
+          currentIndex++;
         }
-      }
-
-      /**
-       * Gets the last item of the linked list
-       * 
-       * @returns {any} The last item
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'getLastItem',
-      value: function getLastItem() {
-        return _last && _last.data;
-      }
-
-      /**
-       * Gets the first item of the linked list
-       * 
-       * @returns {any} The first item
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'getFirstItem',
-      value: function getFirstItem() {
-        return _start && _start.data;
-      }
-
-      /**
-       * Gets an item from the linked list at the given index
-       * 
-       * @param {number} index Index
-       * @returns {any} The item
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'getItemAtIndex',
-      value: function getItemAtIndex(index) {
-        if (index >= _length) {
-          throw new Error('Index greater than the length of List');
-        }
+        var deleteNode = currentNode.next;
+        currentNode.next = deleteNode.next;
         if (index == _length - 1) {
-          return this.getLastItem();
+          _last = currentNode;
         }
-        if (index == 0) {
-          return this.getFirstItem();
-        }
-        var currentNode = _start;
-        var currentIndex = 0;
-        while (currentIndex < index) {
-          currentNode = currentNode.next;
-          currentIndex++;
-        }
-        return currentNode.data;
+        _length--;
       }
+    };
 
-      /**
-       * Removes the first item from the linked list
-       * 
-       * @returns {void}
-       * @memberof _LinkedList
-       */
+    /**
+     * Updates an item of the linked list
+     * 
+     * @param {number} index The index
+     * @param {any} value New value
+     * @returns {void}
+     * @memberof _LinkedList
+     */
 
-    }, {
-      key: 'removeFirstItem',
-      value: function removeFirstItem() {
-        if (_start == null) {
-          throw new Error('Cannot remove element from an empty List');
-        }
-        if (_length == 1) {
-          _start = _last = null;
-          _length = 0;
+
+    _LinkedList.prototype.updateItem = function updateItem(index, value) {
+      if (index >= _length) {
+        throw new Error('Index greater than the length of List');
+      }
+      var currentNode = _start;
+      var currentIndex = 0;
+      while (currentIndex < index) {
+        currentNode = currentNode.next;
+        currentIndex++;
+      }
+      currentNode.data = value;
+    };
+
+    /**
+     * Map function for the linked list
+     * 
+     * @param {Function} callback 
+     * @returns {void}
+     * @memberof _LinkedList
+     */
+
+
+    _LinkedList.prototype.map = function map(callback) {
+      var currentNode = _start;
+      var index = 0;
+      while (currentNode !== null) {
+        if (callback.length == 2) {
+          callback(index, currentNode.data);
         } else {
-          _start = _start.next;
-          _length--;
+          callback(currentNode.data);
         }
+        currentNode = currentNode.next;
+        index++;
       }
+    };
 
-      /**
-       * Removes the last item from the linked list
-       * 
-       * @returns {void}
-       * @memberof _LinkedList
-       */
+    /**
+     * Returns the linked list in the form of an array
+     * 
+     * @returns {any[]} The linked list as an array
+     * @memberof _LinkedList
+     */
 
-    }, {
-      key: 'removeLastItem',
-      value: function removeLastItem() {
-        this.removeItemAtIndex(_length - 1);
-      }
 
-      /**
-       * Removes an item at the given index of linked list
-       * 
-       * @param {number} index 
-       * @returns {void}
-       * @memberof _LinkedList
-       */
+    _LinkedList.prototype.toArray = function toArray() {
+      var listArray = [];
+      this.map(function (value) {
+        listArray.push(value);
+      });
+      return listArray;
+    };
 
-    }, {
-      key: 'removeItemAtIndex',
-      value: function removeItemAtIndex(index) {
-        if (index >= _length) {
-          throw new Error('Index greater than the length of List');
-        }
-        if (index == 0) {
-          this.removeFirstItem();
-        } else {
-          var currentNode = _start;
-          var currentIndex = 0;
-          while (currentIndex < index - 1) {
-            currentNode = currentNode.next;
-            currentIndex++;
-          }
-          var deleteNode = currentNode.next;
-          currentNode.next = deleteNode.next;
-          if (index == _length - 1) {
-            _last = currentNode;
-          }
-          _length--;
-        }
-      }
-
-      /**
-       * Updates an item of the linked list
-       * 
-       * @param {number} index The index
-       * @param {any} value New value
-       * @returns {void}
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'updateItem',
-      value: function updateItem(index, value) {
-        if (index >= _length) {
-          throw new Error('Index greater than the length of List');
-        }
-        var currentNode = _start;
-        var currentIndex = 0;
-        while (currentIndex < index) {
-          currentNode = currentNode.next;
-          currentIndex++;
-        }
-        currentNode.data = value;
-      }
-
-      /**
-       * Map function for the linked list
-       * 
-       * @param {Function} callback 
-       * @returns {void}
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'map',
-      value: function map(callback) {
-        var currentNode = _start;
-        var index = 0;
-        while (currentNode !== null) {
-          if (callback.length == 2) {
-            callback(index, currentNode.data);
-          } else {
-            callback(currentNode.data);
-          }
-          currentNode = currentNode.next;
-          index++;
-        }
-      }
-
-      /**
-       * Returns the linked list in the form of an array
-       * 
-       * @returns {any[]} The linked list as an array
-       * @memberof _LinkedList
-       */
-
-    }, {
-      key: 'toArray',
-      value: function toArray() {
-        var listArray = [];
-        this.map(function (value) {
-          listArray.push(value);
-        });
-        return listArray;
-      }
-    }, {
+    _createClass(_LinkedList, [{
       key: 'length',
       get: function get() {
         return _length;
@@ -461,6 +447,15 @@ Object.defineProperty(exports, 'Set', {
   }
 });
 
+var _Dictionary = __webpack_require__(7);
+
+Object.defineProperty(exports, 'Dictionary', {
+  enumerable: true,
+  get: function get() {
+    return _Dictionary.Dictionary;
+  }
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -475,11 +470,13 @@ exports.LinkedListNode = undefined;
 
 var _DsNode = __webpack_require__(3);
 
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 /**
  * LinkedListNode class
@@ -498,7 +495,7 @@ var LinkedListNode = exports.LinkedListNode = function (_Node) {
   function LinkedListNode() {
     _classCallCheck(this, LinkedListNode);
 
-    var _this = _possibleConstructorReturn(this, (LinkedListNode.__proto__ || Object.getPrototypeOf(LinkedListNode)).call(this));
+    var _this = _possibleConstructorReturn(this, _Node.call(this));
 
     _this.next = null;
     return _this;
@@ -580,91 +577,83 @@ var QueueList = exports.QueueList = function () {
    */
 
 
+  /**
+   * Inserts an element in the tail of queue
+   * 
+   * @param {any} item 
+   * @returns {void}
+   * @memberof QueueList
+   */
+  QueueList.prototype.enqueue = function enqueue(item) {
+    this.list.addItem(item);
+  };
+
+  /**
+   * Removes an element from the head of queue
+   * 
+   * @returns {any} The Head of queue
+   * @memberof QueueList
+   */
+
+
+  QueueList.prototype.dequeue = function dequeue() {
+    if (!this.isEmpty()) {
+      return this.list.removeFirstItem();
+    } else {
+      throw new Error('Cannot perform the dequeue operation, the Queue is empty');
+    }
+  };
+
+  /**
+   * Checks if the queue is empty
+   * 
+   * @returns {boolean} True if queue is empty, false otherwise
+   * @memberof QueueList
+   */
+
+
+  QueueList.prototype.isEmpty = function isEmpty() {
+    return this.list.length == 0;
+  };
+
+  /**
+   * Returns the head element of queue, without removing it
+   * 
+   * @returns {any} The head element of queue
+   * @memberof QueueList
+   */
+
+
+  QueueList.prototype.peek = function peek() {
+    return this.list.getFirstItem();
+  };
+
+  /**
+   * Map function on the queue used to iterate each element
+   * 
+   * @param {Function} callback 
+   * @returns {void}
+   * @memberof QueueList
+   */
+
+
+  QueueList.prototype.map = function map(callback) {
+    this.list.map(callback);
+  };
+
+  /**
+   * Returns the queue in the form of an array
+   * 
+   * @returns {any[]} The queue in array form
+   * @memberof QueueList
+   */
+
+
+  QueueList.prototype.toArray = function toArray() {
+    return this.list.toArray();
+  };
+
   _createClass(QueueList, [{
-    key: 'enqueue',
-
-
-    /**
-     * Inserts an element in the tail of queue
-     * 
-     * @param {any} item 
-     * @returns {void}
-     * @memberof QueueList
-     */
-    value: function enqueue(item) {
-      this.list.addItem(item);
-    }
-
-    /**
-     * Removes an element from the head of queue
-     * 
-     * @returns {any} The Head of queue
-     * @memberof QueueList
-     */
-
-  }, {
-    key: 'dequeue',
-    value: function dequeue() {
-      if (!this.isEmpty()) {
-        return this.list.removeFirstItem();
-      } else {
-        throw new Error('Cannot perform the dequeue operation, the Queue is empty');
-      }
-    }
-
-    /**
-     * Checks if the queue is empty
-     * 
-     * @returns {boolean} True if queue is empty, false otherwise
-     * @memberof QueueList
-     */
-
-  }, {
-    key: 'isEmpty',
-    value: function isEmpty() {
-      return this.list.length == 0;
-    }
-
-    /**
-     * Returns the head element of queue, without removing it
-     * 
-     * @returns {any} The head element of queue
-     * @memberof QueueList
-     */
-
-  }, {
-    key: 'peek',
-    value: function peek() {
-      return this.list.getFirstItem();
-    }
-
-    /**
-     * Map function on the queue used to iterate each element
-     * 
-     * @param {Function} callback 
-     * @returns {void}
-     * @memberof QueueList
-     */
-
-  }, {
-    key: 'map',
-    value: function map(callback) {
-      this.list.map(callback);
-    }
-
-    /**
-     * Returns the queue in the form of an array
-     * 
-     * @returns {any[]} The queue in array form
-     * @memberof QueueList
-     */
-
-  }, {
-    key: 'toArray',
-    value: function toArray() {
-      return this.list.toArray();
-    }
-  }, {
     key: 'length',
     get: function get() {
       return this.list.length;
@@ -717,92 +706,84 @@ var StackList = exports.StackList = function () {
    */
 
 
+  /**
+   * Adds an item into the stack, performs push operation on stack
+   * 
+   * @param {any} item	Item to push into stack
+   * @returns {void}
+   * @memberof StackList
+   */
+  StackList.prototype.push = function push(item) {
+    this.list.addItem(item);
+  };
+
+  /**
+   * Removes the top item from the stack, performs pop operation on stack
+   * 
+   * @returns {any}	The top element of stack
+   * @memberof StackList
+   */
+
+
+  StackList.prototype.pop = function pop() {
+    if (!this.isEmpty()) {
+      var popElement = this.list.getLastItem();
+      this.list.removeLastItem();
+      return popElement;
+    }
+    throw new Error('Cannot perform the pop operation, the stack is empty');
+  };
+
+  /**
+   * Returns the top element of the stack
+   * 
+   * @returns {any} The top element of stack
+   * @memberof StackList
+   */
+
+
+  StackList.prototype.peek = function peek() {
+    return this.list.getLastItem();
+  };
+
+  /**
+   * Checks if the stack is empty
+   * 
+   * @returns {boolean} True if stack is empty, false otherwise
+   * @memberof StackList
+   */
+
+
+  StackList.prototype.isEmpty = function isEmpty() {
+    return this.list.length == 0;
+  };
+
+  /**
+   * Map function on the stack used to iterate each element
+   * 
+   * @param {Function} callback 
+   * @returns {void} 
+   * @memberof StackList
+   */
+
+
+  StackList.prototype.map = function map(callback) {
+    this.list.map(callback);
+  };
+
+  /**
+   * Returns the stack as an array
+   * 
+   * @returns {any[]} 
+   * @memberof StackList
+   */
+
+
+  StackList.prototype.toArray = function toArray() {
+    return this.list.toArray();
+  };
+
   _createClass(StackList, [{
-    key: 'push',
-
-
-    /**
-     * Adds an item into the stack, performs push operation on stack
-     * 
-     * @param {any} item	Item to push into stack
-     * @returns {void}
-     * @memberof StackList
-     */
-    value: function push(item) {
-      this.list.addItem(item);
-    }
-
-    /**
-     * Removes the top item from the stack, performs pop operation on stack
-     * 
-     * @returns {any}	The top element of stack
-     * @memberof StackList
-     */
-
-  }, {
-    key: 'pop',
-    value: function pop() {
-      if (!this.isEmpty()) {
-        var popElement = this.list.getLastItem();
-        this.list.removeLastItem();
-        return popElement;
-      }
-      throw new Error('Cannot perform the pop operation, the stack is empty');
-    }
-
-    /**
-     * Returns the top element of the stack
-     * 
-     * @returns {any} The top element of stack
-     * @memberof StackList
-     */
-
-  }, {
-    key: 'peek',
-    value: function peek() {
-      return this.list.getLastItem();
-    }
-
-    /**
-     * Checks if the stack is empty
-     * 
-     * @returns {boolean} True if stack is empty, false otherwise
-     * @memberof StackList
-     */
-
-  }, {
-    key: 'isEmpty',
-    value: function isEmpty() {
-      return this.list.length == 0;
-    }
-
-    /**
-     * Map function on the stack used to iterate each element
-     * 
-     * @param {Function} callback 
-     * @returns {void} 
-     * @memberof StackList
-     */
-
-  }, {
-    key: 'map',
-    value: function map(callback) {
-      this.list.map(callback);
-    }
-
-    /**
-     * Returns the stack as an array
-     * 
-     * @returns {any[]} 
-     * @memberof StackList
-     */
-
-  }, {
-    key: 'toArray',
-    value: function toArray() {
-      return this.list.toArray();
-    }
-  }, {
     key: 'length',
     get: function get() {
       return this.list.length;
@@ -881,6 +862,104 @@ function Set() {
 		return setArray;
 	};
 }
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Dictionary = exports.Dictionary = function () {
+  var _map = null;
+
+  var _Dictionary = function () {
+    function _Dictionary() {
+      _classCallCheck(this, _Dictionary);
+
+      _map = new Map();
+    }
+
+    _Dictionary.prototype.set = function set(key, value) {
+      _map.set(key, value);
+    };
+
+    _Dictionary.prototype.get = function get(key) {
+      return _map.get(key);
+    };
+
+    _Dictionary.prototype.keys = function keys() {
+      var keys = [];
+      _map.forEach(function (value, key) {
+        keys.push(key);
+      });
+      return keys;
+    };
+
+    _Dictionary.prototype.values = function values() {
+      var values = [];
+      _map.forEach(function (value, key) {
+        values.push(value);
+      });
+      return values;
+    };
+
+    _Dictionary.prototype.has = function has(key) {
+      return _map.has(key);
+    };
+
+    _Dictionary.prototype.map = function map(callback) {
+      if (callback.length == 1) {
+        _map.forEach(function (value, key) {
+          callback(value);
+        });
+      } else {
+        _map.forEach(function (value, key) {
+          callback(key, value);
+        });
+      }
+    };
+
+    _Dictionary.prototype.entries = function entries() {
+      var entries = [];
+      _map.forEach(function (value, key) {
+        entries.push([key, value]);
+      });
+      return entries;
+    };
+
+    _Dictionary.prototype.delete = function _delete(key) {
+      _map.delete(key);
+    };
+
+    _Dictionary.prototype.clear = function clear() {
+      _map.clear();
+    };
+
+    _Dictionary.prototype.isEmpty = function isEmpty() {
+      return _map.size === 0;
+    };
+
+    _createClass(_Dictionary, [{
+      key: "size",
+      get: function get() {
+        return _map.size;
+      }
+    }]);
+
+    return _Dictionary;
+  }();
+
+  return _Dictionary;
+}();
 
 /***/ })
 /******/ ]);
